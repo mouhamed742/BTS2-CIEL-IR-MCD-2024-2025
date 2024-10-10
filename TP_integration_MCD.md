@@ -132,7 +132,7 @@ Naviguez vers le dossier `database/migrations`.
 
 **Tâche :** Pour chaque fichier de migration créé, définissez la structure de la table correspondante en vous appuyant sur votre MCD étendu.
 
-Les relations `one-to-many` vont être matérialisées par des clés étrangères dans la table `champion`.
+Chaque ligne de la fonction `up` correspond à la création d'une colonne de notre base de données. Les relations `one-to-many` vont être matérialisées par des clés étrangères dans la table `champion`.
 
 Exemple pour la table `champions` :
 
@@ -140,7 +140,7 @@ Exemple pour la table `champions` :
 public function up()
 {
     Schema::create('champions', function (Blueprint $table) {
-        $table->id();
+        $table->id('champion_id);
         $table->string('name', 50);
         $table->foreignId('gender_id')->constrained();
         $table->foreignId('resource_id')->constrained();
@@ -159,7 +159,7 @@ public function up()
         $table->id('champion_position_id');
         $table->foreignId('champion_id')->constrained();
         $table->foreignId('position_id')->constrained();
-        $table->timestamps();
+        $table->unique(['champion_id', 'position_id']);
     });
 }
 ```
@@ -181,6 +181,7 @@ php artisan make:model Resource
 php artisan make:model Range
 php artisan make:model Region
 ```
+
 ### 4. Définition des relations dans les modèles
 
 Naviguez vers le dossier `app/Models`.
