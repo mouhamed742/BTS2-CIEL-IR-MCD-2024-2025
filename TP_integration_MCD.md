@@ -63,7 +63,7 @@ erDiagram
         varchar(50) champion_name
     }
     GENDER {
-        int id_gender PK
+        int gender_id PK
         varchar(20) name
     }
     POSITION {
