@@ -1,4 +1,4 @@
-# Le Modèle MVC (Modèle-Vue-Contrôleur) : Illustration avec League of Branly
+# Le Modèle MVC (Modèle-Vue-Contrôleur)
 
 ## Introduction
 
