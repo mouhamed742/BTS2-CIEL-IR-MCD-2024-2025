@@ -6,6 +6,7 @@ L'objectif de ce TP est de vous familiariser avec l'écriture de requêtes SQL c
 ## Prérequis
 - Connaissance de base du SQL
 - Compréhension du MCD de League of Legends fourni précédemment
+- **Télécharger et appliquer les migrations et le contenu du fichier insert_champion_data** de la branche **SQL**
 
 ## Contexte
 Vous travaillez sur une base de données MySQL qui gère les informations sur les champions de League of Legends. Les tables correspondant au MCD ont déjà été créées.
