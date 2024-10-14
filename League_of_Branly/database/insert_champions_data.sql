@@ -1,15 +1,15 @@
-INSERT INTO champions (name, title, lore, release_date, gender_id, resource_id, year_id)
+INSERT INTO champions (name, title, lore, gender_id, resource_id, year_id)
 VALUES 
-('Zoe', 'The Aspect of Twilight', 'Zoe is a cosmic messenger of Targon...', '2017-11-21', 2, 1, 9),
-('Bard', 'The Wandering Caretaker', 'Bard travels through realms beyond...', '2015-03-12', 3, 1, 7),
-('Rengar', 'The Pridestalker', 'Rengar is a ferocious vastayan...', '2012-08-21', 1, 5, 4),
-('Gnar', 'The Missing Link', 'Gnar is a primitive yordle...', '2014-08-14', 1, 3, 6),
-('Rek''Sai', 'The Void Burrower', 'Rek''Sai is a predator from the Void...', '2014-12-11', 2, 3, 6),
-('Senna', 'The Redeemer', 'Senna is a tragic hero...', '2019-11-10', 2, 1, 11),
-('Zac', 'The Secret Weapon', 'Zac is a Zaun-born golem...', '2013-03-29', 1, 10, 5),
-('Kennen', 'The Heart of the Tempest', 'Kennen is an energetic yordle...', '2010-04-08', 1, 2, 2),
-('Vladimir', 'The Crimson Reaper', 'Vladimir is a hemomancer...', '2010-07-27', 1, 7, 2),
-('Ornn', 'The Fire Below the Mountain', 'Ornn is the Freljordian spirit...', '2017-08-23', 1, 1, 9);
+('Zoe', 'The Aspect of Twilight', 'Zoe is a cosmic messenger of Targon...', 2, 1, 9),
+('Bard', 'The Wandering Caretaker', 'Bard travels through realms beyond...', 3, 1, 7),
+('Rengar', 'The Pridestalker', 'Rengar is a ferocious vastayan...', 1, 5, 4),
+('Gnar', 'The Missing Link', 'Gnar is a primitive yordle...', 1, 3, 6),
+('Rek''Sai', 'The Void Burrower', 'Rek''Sai is a predator from the Void...', 2, 3, 6),
+('Senna', 'The Redeemer', 'Senna is a tragic hero...', 2, 1, 11),
+('Zac', 'The Secret Weapon', 'Zac is a Zaun-born golem...', 1, 10, 5),
+('Kennen', 'The Heart of the Tempest', 'Kennen is an energetic yordle...', 1, 2, 2),
+('Vladimir', 'The Crimson Reaper', 'Vladimir is a hemomancer...', 1, 7, 2),
+('Ornn', 'The Fire Below the Mountain', 'Ornn is the Freljordian spirit...', 1, 1, 9);
 
 -- Now, let's insert the relationships
 
