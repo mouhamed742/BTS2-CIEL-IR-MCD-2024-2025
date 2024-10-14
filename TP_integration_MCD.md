@@ -110,7 +110,6 @@ Ouvrez le terminal de votre conteneur dans Docker Desktop.
 **Tâche :** Créez les migrations pour toutes les tables nécessaires.
 
 ```bash
-php artisan make:migration create_champions_table
 php artisan make:migration create_genders_table
 php artisan make:migration create_positions_table
 php artisan make:migration create_species_table
@@ -118,6 +117,7 @@ php artisan make:migration create_resources_table
 php artisan make:migration create_ranges_table
 php artisan make:migration create_regions_table
 php artisan make:migration create_year_table
+php artisan make:migration create_champions_table
 php artisan make:migration create_champion_position_table
 php artisan make:migration create_champion_specie_table
 php artisan make:migration create_champion_range_table
