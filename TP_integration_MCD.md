@@ -92,13 +92,13 @@ erDiagram
         int year_number
     }
 
-    CHAMPION ||--o| GENDER : "has"
-    CHAMPION }o--o{ POSITION : "can_play_as"
-    CHAMPION }o--o{ SPECIE : "belongs_to"
-    CHAMPION ||--o| RESOURCE : "uses"
-    CHAMPION }o--o{ RANGE : "has"
-    CHAMPION }o--o{ REGION : "comes_from"
-    CHAMPION ||--o| YEAR : "released_in"
+    CHAMPION ||--o{ GENDER : "has"
+    CHAMPION }o--|{ POSITION : "can_play_as"
+    CHAMPION }o--|{ SPECIE : "belongs_to"
+    CHAMPION }o--|| RESOURCE : "uses"
+    CHAMPION }o--|{ RANGE : "has"
+    CHAMPION }o--|{ REGION : "comes_from"
+    CHAMPION }o--|| YEAR : "released_in"
 ```
 
 ### 1. Création des migrations
