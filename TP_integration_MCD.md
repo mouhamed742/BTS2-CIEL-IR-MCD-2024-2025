@@ -177,9 +177,10 @@ php artisan make:model Champion
 php artisan make:model Gender
 php artisan make:model Position
 php artisan make:model Specie
-php artisan make:model Resource
 php artisan make:model Range
 php artisan make:model Region
+php artisan make:model Resource
+php artisan make:model Year
 ```
 
 ### 4. Définition des relations dans les modèles
