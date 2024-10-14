@@ -12,9 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('champion_range', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('champion_id')->constrained()->onDelete('cascade');
-            $table->foreignId('range_id')->constrained()->onDelete('cascade');
+            $table->id('champion_range_id');
+            $table->unsignedBigInteger('champion_id');
+            $table->unsignedBigInteger('range_id');
+
+            $table->foreign('champion_id')
+                  ->references('champion_id')
+                  ->on('champions')
+                  ->onDelete('cascade');
+
+            $table->foreign('range_id')
+                  ->references('range_id')
+                  ->on('range_types')
+                  ->onDelete('cascade');
+
             $table->unique(['champion_id', 'range_id']);
             $table->timestamps();
         });

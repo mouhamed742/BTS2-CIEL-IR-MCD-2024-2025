@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('years', function (Blueprint $table) {
-            $table->id('years_id');
-            $table->integer('year');
+            $table->id('year_id');
+            $table->integer('year')->unique();
             $table->timestamps();
         });
 

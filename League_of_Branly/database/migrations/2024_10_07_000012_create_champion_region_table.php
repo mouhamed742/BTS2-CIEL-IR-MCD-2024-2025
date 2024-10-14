@@ -12,9 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('champion_region', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('champion_id')->constrained()->onDelete('cascade');
-            $table->foreignId('region_id')->constrained()->onDelete('cascade');
+            $table->id('champion_region_id');
+            $table->unsignedBigInteger('champion_id');
+            $table->unsignedBigInteger('region_id');
+
+            $table->foreign('champion_id')
+                  ->references('champion_id')
+                  ->on('champions')
+                  ->onDelete('cascade');
+
+            $table->foreign('region_id')
+                  ->references('region_id')
+                  ->on('regions')
+                  ->onDelete('cascade');
             $table->unique(['champion_id', 'region_id']);
         });
     }

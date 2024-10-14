@@ -5,147 +5,103 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
-class AddTenChampions extends Migration
+return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        // Insérer les champions
-        $champions = [
-            ['name' => 'Zoe', 'title' => 'The Aspect of Twilight', 'lore' => 'Zoe is a cosmic messenger of Targon...', 'release_date' => '2017-11-21', 'gender_id' => 2, 'resource_id' => 1, 'year_id' => 9],
-            ['name' => 'Bard', 'title' => 'The Wandering Caretaker', 'lore' => 'Bard travels through realms beyond...', 'release_date' => '2015-03-12', 'gender_id' => 3, 'resource_id' => 1, 'year_id' => 7],
-            ['name' => 'Rengar', 'title' => 'The Pridestalker', 'lore' => 'Rengar is a ferocious vastayan...', 'release_date' => '2012-08-21', 'gender_id' => 1, 'resource_id' => 5, 'year_id' => 4],
-            ['name' => 'Gnar', 'title' => 'The Missing Link', 'lore' => 'Gnar is a primitive yordle...', 'release_date' => '2014-08-14', 'gender_id' => 1, 'resource_id' => 3, 'year_id' => 6],
-            ['name' => 'Rek\'Sai', 'title' => 'The Void Burrower', 'lore' => 'Rek\'Sai is a predator from the Void...', 'release_date' => '2014-12-11', 'gender_id' => 2, 'resource_id' => 3, 'year_id' => 6],
-            ['name' => 'Senna', 'title' => 'The Redeemer', 'lore' => 'Senna is a tragic hero...', 'release_date' => '2019-11-10', 'gender_id' => 2, 'resource_id' => 1, 'year_id' => 11],
-            ['name' => 'Zac', 'title' => 'The Secret Weapon', 'lore' => 'Zac is a Zaun-born golem...', 'release_date' => '2013-03-29', 'gender_id' => 1, 'resource_id' => 10, 'year_id' => 5],
-            ['name' => 'Kennen', 'title' => 'The Heart of the Tempest', 'lore' => 'Kennen is an energetic yordle...', 'release_date' => '2010-04-08', 'gender_id' => 1, 'resource_id' => 2, 'year_id' => 2],
-            ['name' => 'Vladimir', 'title' => 'The Crimson Reaper', 'lore' => 'Vladimir is a hemomancer...', 'release_date' => '2010-07-27', 'gender_id' => 1, 'resource_id' => 7, 'year_id' => 2],
-            ['name' => 'Ornn', 'title' => 'The Fire Below the Mountain', 'lore' => 'Ornn is the Freljordian spirit...', 'release_date' => '2017-08-23', 'gender_id' => 1, 'resource_id' => 1, 'year_id' => 9],
-        ];
+        $sql = <<<SQL
+INSERT INTO champions (name, title, lore, gender_id, resource_id, year_id)
+VALUES 
+('Zoe', 'The Aspect of Twilight', 'Zoe is a cosmic messenger of Targon...', 2, 1, (SELECT year_id FROM years WHERE year = 2017)),
+('Bard', 'The Wandering Caretaker', 'Bard travels through realms beyond...', 3, 1, (SELECT year_id FROM years WHERE year = 2015)),
+('Rengar', 'The Pridestalker', 'Rengar is a ferocious vastayan...', 1, 5, (SELECT year_id FROM years WHERE year = 2012)),
+('Gnar', 'The Missing Link', 'Gnar is a primitive yordle...', 1, 3, (SELECT year_id FROM years WHERE year = 2014)),
+('Rek''Sai', 'The Void Burrower', 'Rek''Sai is a predator from the Void...', 2, 3, (SELECT year_id FROM years WHERE year = 2014)),
+('Senna', 'The Redeemer', 'Senna is a tragic hero...', 2, 1, (SELECT year_id FROM years WHERE year = 2019)),
+('Zac', 'The Secret Weapon', 'Zac is a Zaun-born golem...', 1, 10, (SELECT year_id FROM years WHERE year = 2013)),
+('Kennen', 'The Heart of the Tempest', 'Kennen is an energetic yordle...', 1, 2, (SELECT year_id FROM years WHERE year = 2010)),
+('Vladimir', 'The Crimson Reaper', 'Vladimir is a hemomancer...', 1, 7, (SELECT year_id FROM years WHERE year = 2010)),
+('Ornn', 'The Fire Below the Mountain', 'Ornn is the Freljordian spirit...', 1, 1, (SELECT year_id FROM years WHERE year = 2017));
 
-        DB::table('champions')->insert($champions);
+-- Champion positions
+INSERT INTO champion_position (champion_id, position_id)
+VALUES 
+((SELECT champion_id FROM champions WHERE name = 'Zoe'), 3),
+((SELECT champion_id FROM champions WHERE name = 'Bard'), 5),
+((SELECT champion_id FROM champions WHERE name = 'Rengar'), 2),
+((SELECT champion_id FROM champions WHERE name = 'Gnar'), 1),
+((SELECT champion_id FROM champions WHERE name = 'Rek''Sai'), 2),
+((SELECT champion_id FROM champions WHERE name = 'Senna'), 5),
+((SELECT champion_id FROM champions WHERE name = 'Senna'), 4),
+((SELECT champion_id FROM champions WHERE name = 'Zac'), 2),
+((SELECT champion_id FROM champions WHERE name = 'Zac'), 1),
+((SELECT champion_id FROM champions WHERE name = 'Kennen'), 1),
+((SELECT champion_id FROM champions WHERE name = 'Kennen'), 3),
+((SELECT champion_id FROM champions WHERE name = 'Vladimir'), 3),
+((SELECT champion_id FROM champions WHERE name = 'Vladimir'), 1),
+((SELECT champion_id FROM champions WHERE name = 'Ornn'), 1);
 
-        // Associer les positions
-        $positions = [
-            'Zoe' => [3],
-            'Bard' => [5],
-            'Rengar' => [2],
-            'Gnar' => [1],
-            'Rek\'Sai' => [2],
-            'Senna' => [4, 5],
-            'Zac' => [1, 2],
-            'Kennen' => [1, 3],
-            'Vladimir' => [1, 3],
-            'Ornn' => [1],
-        ];
+-- Champion ranges
+INSERT INTO champion_range (champion_id, range_id)
+VALUES 
+((SELECT champion_id FROM champions WHERE name = 'Zoe'), 2),
+((SELECT champion_id FROM champions WHERE name = 'Bard'), 2),
+((SELECT champion_id FROM champions WHERE name = 'Rengar'), 1),
+((SELECT champion_id FROM champions WHERE name = 'Gnar'), 2),
+((SELECT champion_id FROM champions WHERE name = 'Gnar'), 1),
+((SELECT champion_id FROM champions WHERE name = 'Rek''Sai'), 1),
+((SELECT champion_id FROM champions WHERE name = 'Senna'), 2),
+((SELECT champion_id FROM champions WHERE name = 'Zac'), 1),
+((SELECT champion_id FROM champions WHERE name = 'Kennen'), 2),
+((SELECT champion_id FROM champions WHERE name = 'Vladimir'), 2),
+((SELECT champion_id FROM champions WHERE name = 'Ornn'), 1);
 
-        foreach ($positions as $championName => $positionIds) {
-            $championId = DB::table('champions')->where('name', $championName)->value('champion_id');
-            foreach ($positionIds as $positionId) {
-                DB::table('champion_position')->insert([
-                    'champion_id' => $championId,
-                    'position_id' => $positionId,
-                ]);
-            }
-        }
+-- Champion regions
+INSERT INTO champion_region (champion_id, region_id)
+VALUES 
+((SELECT champion_id FROM champions WHERE name = 'Zoe'), 9),
+((SELECT champion_id FROM champions WHERE name = 'Bard'), 1),
+((SELECT champion_id FROM champions WHERE name = 'Bard'), 2),
+((SELECT champion_id FROM champions WHERE name = 'Bard'), 3),
+((SELECT champion_id FROM champions WHERE name = 'Rengar'), 13),
+((SELECT champion_id FROM champions WHERE name = 'Gnar'), 10),
+((SELECT champion_id FROM champions WHERE name = 'Rek''Sai'), 11),
+((SELECT champion_id FROM champions WHERE name = 'Rek''Sai'), 8),
+((SELECT champion_id FROM champions WHERE name = 'Senna'), 7),
+((SELECT champion_id FROM champions WHERE name = 'Senna'), 2),
+((SELECT champion_id FROM champions WHERE name = 'Zac'), 12),
+((SELECT champion_id FROM champions WHERE name = 'Kennen'), 4),
+((SELECT champion_id FROM champions WHERE name = 'Vladimir'), 5),
+((SELECT champion_id FROM champions WHERE name = 'Ornn'), 10);
 
-        // Associer les types de portée
-        $ranges = [
-            'Zoe' => [2],
-            'Bard' => [2],
-            'Rengar' => [1],
-            'Gnar' => [1, 2],
-            'Rek\'Sai' => [1],
-            'Senna' => [2],
-            'Zac' => [1],
-            'Kennen' => [2],
-            'Vladimir' => [2],
-            'Ornn' => [1],
-        ];
+-- Champion species
+INSERT INTO champion_specie (champion_id, specie_id)
+VALUES 
+((SELECT champion_id FROM champions WHERE name = 'Zoe'), 10),
+((SELECT champion_id FROM champions WHERE name = 'Bard'), 7),
+((SELECT champion_id FROM champions WHERE name = 'Rengar'), 3),
+((SELECT champion_id FROM champions WHERE name = 'Gnar'), 2),
+((SELECT champion_id FROM champions WHERE name = 'Gnar'), 3),
+((SELECT champion_id FROM champions WHERE name = 'Gnar'), 11),
+((SELECT champion_id FROM champions WHERE name = 'Rek''Sai'), 4),
+((SELECT champion_id FROM champions WHERE name = 'Senna'), 1),
+((SELECT champion_id FROM champions WHERE name = 'Senna'), 5),
+((SELECT champion_id FROM champions WHERE name = 'Zac'), 6),
+((SELECT champion_id FROM champions WHERE name = 'Kennen'), 2),
+((SELECT champion_id FROM champions WHERE name = 'Vladimir'), 1),
+((SELECT champion_id FROM champions WHERE name = 'Ornn'), 12),
+((SELECT champion_id FROM champions WHERE name = 'Ornn'), 13);
+SQL;
 
-        foreach ($ranges as $championName => $rangeIds) {
-            $championId = DB::table('champions')->where('name', $championName)->value('champion_id');
-            foreach ($rangeIds as $rangeId) {
-                DB::table('champion_range')->insert([
-                    'champion_id' => $championId,
-                    'range_id' => $rangeId,
-                ]);
-            }
-        }
-
-        // Associer les régions
-        $regions = [
-            'Zoe' => [9],
-            'Bard' => [1, 2, 3],
-            'Rengar' => [13],
-            'Gnar' => [10],
-            'Rek\'Sai' => [11, 8],
-            'Senna' => [7, 2],
-            'Zac' => [12],
-            'Kennen' => [4],
-            'Vladimir' => [5],
-            'Ornn' => [10],
-        ];
-
-        foreach ($regions as $championName => $regionIds) {
-            $championId = DB::table('champions')->where('name', $championName)->value('champion_id');
-            foreach ($regionIds as $regionId) {
-                DB::table('champion_region')->insert([
-                    'champion_id' => $championId,
-                    'region_id' => $regionId,
-                ]);
-            }
-        }
-
-        // Associer les espèces
-        $species = [
-            'Zoe' => [10],
-            'Bard' => [7],
-            'Rengar' => [3],
-            'Gnar' => [2, 3, 11],
-            'Rek\'Sai' => [4],
-            'Senna' => [1, 5],
-            'Zac' => [6],
-            'Kennen' => [2],
-            'Vladimir' => [1],
-            'Ornn' => [12, 13],
-        ];
-
-        foreach ($species as $championName => $specieIds) {
-            $championId = DB::table('champions')->where('name', $championName)->value('champion_id');
-            foreach ($specieIds as $specieId) {
-                DB::table('champion_specie')->insert([
-                    'champion_id' => $championId,
-                    'specie_id' => $specieId,
-                ]);
-            }
-        }
+        DB::unprepared($sql);
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        // Supprimer les champions et leurs relations associées
-        $championNames = ['Zoe', 'Bard', 'Rengar', 'Gnar', 'Rek\'Sai', 'Senna', 'Zac', 'Kennen', 'Vladimir', 'Ornn'];
-
-        foreach ($championNames as $name) {
-            $champion = DB::table('champions')->where('name', $name)->first();
-            if ($champion) {
-                DB::table('champion_position')->where('champion_id', $champion->champion_id)->delete();
-                DB::table('champion_range')->where('champion_id', $champion->champion_id)->delete();
-                DB::table('champion_region')->where('champion_id', $champion->champion_id)->delete();
-                DB::table('champion_specie')->where('champion_id', $champion->champion_id)->delete();
-                DB::table('champions')->where('champion_id', $champion->champion_id)->delete();
-            }
-        }
+        DB::table('champion_specie')->truncate();
+        DB::table('champion_region')->truncate();
+        DB::table('champion_range')->truncate();
+        DB::table('champion_position')->truncate();
+        DB::table('champions')->truncate();
     }
-}
+};
