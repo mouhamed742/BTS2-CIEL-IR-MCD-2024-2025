@@ -92,7 +92,7 @@ erDiagram
         int year_number
     }
 
-    CHAMPION ||--o{ GENDER : "has"
+    CHAMPION }o--|| GENDER : "has"
     CHAMPION }o--|{ POSITION : "can_play_as"
     CHAMPION }o--|{ SPECIE : "belongs_to"
     CHAMPION }o--|| RESOURCE : "uses"
