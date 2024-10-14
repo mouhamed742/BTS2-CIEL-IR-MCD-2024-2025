@@ -144,6 +144,7 @@ public function up()
         $table->string('name', 50);
         $table->foreignId('gender_id')->constrained();
         $table->foreignId('resource_id')->constrained();
+        $table->foreignId('year_id')->constrained();
         $table->timestamps();
     });
 }
@@ -226,6 +227,11 @@ class Champion extends Model
     public function regions()
     {
         return $this->belongsToMany(Region::class);
+    }
+
+    public function year()
+    {
+        return $this->belongTo(Year::class);
     }
 }
 ```
