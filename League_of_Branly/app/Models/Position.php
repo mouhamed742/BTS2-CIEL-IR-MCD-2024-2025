@@ -20,6 +20,6 @@ class Position extends Model
      */
     public function champions()
     {
-        return $this->belongsToMany(Champion::class, 'champion_position', 'champion_id', 'position_id');
+        return $this->belongsToMany(Champion::class, 'champion_position', 'position_id', 'champion_id');
     }
 }

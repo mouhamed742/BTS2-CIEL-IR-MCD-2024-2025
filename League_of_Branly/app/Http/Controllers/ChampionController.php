@@ -7,8 +7,9 @@ use App\Models\Gender;
 use App\Models\Position;
 use App\Models\Specie;
 use App\Models\Resource;
-use App\Models\RangeType;
+use App\Models\Range;
 use App\Models\Region;
+use App\Models\Year;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -26,9 +27,26 @@ class ChampionController extends Controller
 
     public function classic()
     {
-        $champions = Champion::with(['gender', 'positions', 'species', 'resource', 'rangeType', 'regions'])
-            ->get();
-        return view('champions.classic', compact('champions'));
+        $champions = Champion::with(['gender', 'species', 'resource', 'ranges', 'positions', 'regions'])->get();
+    
+        $genders = Gender::all();
+        $species = Specie::all();
+        $resources = Resource::all();
+        $ranges = Range::all();
+        $positions = Position::all();
+        $regions = Region::all();
+
+        dump($champions);
+
+        return view('champions.classic', compact(
+            'champions',
+            'genders',
+            'species',
+            'resources',
+            'ranges',
+            'positions',
+            'regions'
+        ));
     }
 
     /**
@@ -42,9 +60,9 @@ class ChampionController extends Controller
         $resources = Resource::all();
         $ranges = RangeType::all();
         $regions = Region::all();
-        $currentYear = date('Y');
+        $years = Year::orderBy('year', 'desc')->get(); // Ajoutez cette ligne
 
-        return view('champions.create', compact('genders', 'positions', 'species', 'resources', 'ranges', 'regions', 'currentYear'));
+        return view('champions.create', compact('genders', 'positions', 'species', 'resources', 'ranges', 'regions', 'years'));
     }
 
     /**
@@ -54,7 +72,7 @@ class ChampionController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:255',
-            'release_year' => 'required|integer|min:2009|max:' . date('Y'),
+            'years_id' => 'required|exists:years,years_id',
             'gender_id' => 'required|exists:genders,id',
             'resource_id' => 'required|exists:resources,id',
             'species' => 'required|array',
@@ -68,7 +86,7 @@ class ChampionController extends Controller
         ]);
 
         // Convert the release year to a date
-        $validatedData['release_date'] = Carbon::createFromDate($validatedData['release_year'], 1, 1)->toDateString();
+        $validatedData['year_id'] = Carbon::createFromDate($validatedData['release_year'], 1, 1)->toDateString();
         unset($validatedData['release_year']);
 
         $champion = Champion::create($validatedData);
@@ -117,4 +135,61 @@ class ChampionController extends Controller
         Champion::find($id)->delete();
         return redirect()->route('champions.index');
     }
+
+    public function filter(Request $request)
+{
+    $query = Champion::with(['gender', 'specie', 'resource', 'range', 'positions', 'regions']);
+
+    // Filtres d'inclusion
+    if ($request->gender) {
+        $query->where('gender_id', $request->gender);
+    }
+    if ($request->specie) {
+        $query->where('specie_id', $request->specie);
+    }
+    if ($request->resource) {
+        $query->where('resource_id', $request->resource);
+    }
+    if ($request->range_type) {
+        $query->where('range_id', $request->range_type);
+    }
+    if ($request->position) {
+        $query->whereHas('positions', function ($q) use ($request) {
+            $q->where('positions.id', $request->position);
+        });
+    }
+    if ($request->region) {
+        $query->whereHas('regions', function ($q) use ($request) {
+            $q->where('regions.id', $request->region);
+        });
+    }
+
+    // Filtres d'exclusion
+    if ($request->exclude_gender) {
+        $query->where('gender_id', '!=', $request->exclude_gender);
+    }
+    if ($request->exclude_specie) {
+        $query->where('specie_id', '!=', $request->exclude_specie);
+    }
+    if ($request->exclude_resource) {
+        $query->where('resource_id', '!=', $request->exclude_resource);
+    }
+    if ($request->exclude_range_type) {
+        $query->where('range_id', '!=', $request->exclude_range_type);
+    }
+    if ($request->exclude_position) {
+        $query->whereDoesntHave('positions', function ($q) use ($request) {
+            $q->where('positions.id', $request->exclude_position);
+        });
+    }
+    if ($request->exclude_region) {
+        $query->whereDoesntHave('regions', function ($q) use ($request) {
+            $q->where('regions.id', $request->exclude_region);
+        });
+    }
+
+    $champions = $query->get();
+
+    return response()->json($champions);
+}
 }

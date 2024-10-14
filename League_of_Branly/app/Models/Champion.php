@@ -20,7 +20,7 @@ class Champion extends Model
         'name',
         'title',
         'lore',
-        'year_id',
+        'years_id',
         'gender_id',
         'resource_id'
     ];
@@ -28,14 +28,6 @@ class Champion extends Model
     ///////////////////
     // RELATIONSHIPS //
     ///////////////////
-
-    /**
-     * Many-to-Many: A Champion can have multiple roles.
-     */
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class, 'champion_role', 'champion_id', 'role_id');
-    }
 
     /**
      * Many-to-Many: A Champion belongs to one or more region.
@@ -59,7 +51,7 @@ class Champion extends Model
      */
     public function positions()
     {
-        return $this->belongsToMany(Position::class);
+        return $this->belongsToMany(Position::class, 'champion_position', 'champion_id', 'position_id');
     }
 
     /**
@@ -67,7 +59,7 @@ class Champion extends Model
      */
     public function species()
     {
-        return $this->belongsToMany(Species::class);
+        return $this->belongsToMany(Specie::class, 'champion_specie', 'champion_id', 'specie_id');
     }
 
     /**
@@ -81,8 +73,13 @@ class Champion extends Model
     /**
      * Many-to-Many: A Champion can have multiple ranges.
      */
-    public function rangeTypes()
+    public function ranges()
     {
-        return $this->belongsTo(RangeTypes::class);
+        return $this->belongsToMany(Range::class, 'champion_range', 'champion_id', 'range_id');
+    }
+
+    public function year()
+    {
+        return $this->belongsTo(Year::class, 'years_id', 'years_id');
     }
 }

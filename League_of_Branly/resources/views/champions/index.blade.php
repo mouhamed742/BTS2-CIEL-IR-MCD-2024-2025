@@ -3,7 +3,6 @@
 @extends('layouts.app')
 
 @section('content')
-@section('content')
 <div class="container">
     <x-table-grid-view
         title="Champions"

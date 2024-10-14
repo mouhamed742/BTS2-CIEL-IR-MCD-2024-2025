@@ -19,12 +19,18 @@
             <textarea class="form-control" id="lore" name="lore" rows="3"></textarea>
         </div>
         <div class="mb-3">
-            <label for="release_year" class="form-label">Release Year</label>
-            <input type="number" class="form-control" id="release_year" name="release_date" min="2009" max="{{ date('Y') }}" required>
+            <label for="years_id" class="form-label">Release Year</label>
+            <select class="form-select" id="years_id" name="years_id" required>
+                <option value="" disabled selected>-</option>
+                @foreach($years as $year)
+                    <option value="{{ $year->years_id }}">{{ $year->year }}</option>
+                @endforeach
+            </select>
         </div>
         <div class="mb-3">
             <label for="gender_id" class="form-label">Gender</label>
             <select class="form-select" id="gender_id" name="gender_id" required>
+                <option value="" disabled selected>-</option>
                 @foreach($genders as $gender)
                 <option value="{{ $gender->id }}">{{ $gender->name }}</option>
                 @endforeach
@@ -33,6 +39,7 @@
         <div class="mb-3">
             <label for="resource_id" class="form-label">Resource</label>
             <select class="form-select" id="resource_id" name="resource_id" required>
+                <option value="" disabled selected>-</option>
                 @foreach($resources as $resource)
                 <option value="{{ $resource->id }}">{{ $resource->name }}</option>
                 @endforeach

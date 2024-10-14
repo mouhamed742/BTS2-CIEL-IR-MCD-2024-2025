@@ -22,6 +22,6 @@ class Specie extends Model
      */
     public function champions()
     {
-        return $this->belongsToMany(Champion::class, 'champion_specie', 'champion_id', 'specie_id');
+        return $this->belongsToMany(Champion::class, 'champion_specie', 'specie_id', 'champion_id');
     }
 }
