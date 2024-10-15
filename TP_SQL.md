@@ -6,6 +6,7 @@ L'objectif de ce TP est de vous familiariser avec l'écriture de requêtes SQL, 
 ## Prérequis
 - Connaissance de base du SQL
 - Compréhension du MCD de League of Branly fourni ci-dessous
+- L'exécution des migrations qui vous sont fournis dans ce repository `League_of_Branly/database/migrations`.
 
 ```mermaid
 erDiagram
@@ -90,12 +91,12 @@ Assurez-vous d'insérer également les données nécessaires dans les tables piv
 
 ### 5. Recherche de champions par nom
 Implémentez une requête qui permet de trouver des champions dont le nom contient une chaîne spécifique.
-On pourra tester avec la chaîne `ar`.
+On pourra tester avec la chaîne `ar` qui devra retourner trois noms : `Bard`, `Rengar` et `Gnar`.
 
 ### 6. Modification d'un enregistrement
 Mettez à jour la popularité des champions en leur attribuant une valeur aléatoire entre 1 et 10. Utilisez la fonction `RANDOM()` (`RAND()` sous MySQL et `RANDOM()` sous SQLite) pour générer cette valeur aléatoire. 
 
-Note : `RANDOM()` genère un nombre entre -9223372036854775808 et +9223372036854775807.
+Note : `RANDOM()` genère un nombre entre -9223372036854775808 et +9223372036854775807. Pour générer un nombre entre 1 et 10 vous pouvez vous appuyer sur ce que vous avez fait en co-intervention de maths sur la méthode d'approximation d'une intégrale par la méthode de Monté-Carlo.
 
 ### 7. Suppression d'un enregistrement
 Supprimez un champion spécifique de la table.
