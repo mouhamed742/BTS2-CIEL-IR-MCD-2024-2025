@@ -2,6 +2,8 @@
 
 Pour terminer le projet, nous devons nous assurer que tous les modèles et controllers sont fonctionnels.
 
+Vous trouverez les notions nécessaires dans la synthèse de cours [sur les MVC](MVC.md)
+
 ## Modèles & relations
 
 Les modèles se trouvent dans le dossier `app/Models`.
