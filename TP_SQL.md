@@ -12,6 +12,7 @@ erDiagram
     CHAMPION {
         int champion_id PK
         varchar(50) name
+        varchar(50) lore
         int gender_id FK
         int resource_id FK
         int year_id FK
