@@ -74,6 +74,7 @@ Ajoutez une nouvelle colonne `popularity` de type INT à la table `champions`.
 Insérez le champion Fiddlesticks dans la table `champions` avec les attributs suivants :
 - Nom : Fiddlesticks
 - Titre : The Ancient Fear
+- Lore : Something has awoken in Runeterra. Something ancient. Something terrible. The ageless horror known as Fiddlesticks stalks the edges of mortal society, drawn to areas thick with paranoia where it feeds upon terrorized victims. Wielding a jagged scythe, the haggard, makeshift creature reaps fear itself, shattering the minds of those unlucky enough to survive in its wake. Beware the sounding of the crow, or the whispering of the shape that appears almost human... Fiddlesticks has returned. 
 - Genre : Autre
 - Espèce : Démon
 - Ressource : Mana
