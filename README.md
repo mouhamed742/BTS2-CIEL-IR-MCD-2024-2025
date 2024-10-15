@@ -24,4 +24,4 @@ L'usage des ces documents en dehors de la formation nommée ci-dessus est formel
   1. [TP MCD](TP_MCD.md)
   2. [TP Intégration du MCD dans un site web](TP_integration_MCD.md)
   3. [TP SQL](./TP_SQL.md)
-  4. [TP_MVC](./TP_MVC.md)
+  4. [TP MVC](./TP_MVC.md)
