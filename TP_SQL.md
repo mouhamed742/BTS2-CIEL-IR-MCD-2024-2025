@@ -66,7 +66,7 @@ Vous travaillez sur une base de données SQLite qui gère les informations sur l
 - Pensez à l'utilisation appropriée des index pour améliorer les performances des requêtes.
 
 ### 1. Création d'une table
-Créez une table `champions` avec les colonnes appropriées basées sur le MCD fourni.
+Créez une table `champion` avec les colonnes appropriées basées sur le MCD fourni. Après l'exécution de la requête, votre table `champion` doit avoir strictement la même structure que la table `champions`.
 
 ### 2. Modification d'une table
 Ajoutez une nouvelle colonne `popularity` de type INT à la table `champions`.
